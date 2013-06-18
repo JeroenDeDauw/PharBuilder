@@ -21,9 +21,9 @@ class PharBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	protected function newDataModelBuilder() {
 		return new PharBuilder(
-			'WikibaseDataModel.phar',
-			'WikibaseDataModel',
-			'WikibaseDataModel.php',
+			'PharBuilder.phar',
+			'PharBuilder',
+			'entryPoint.php',
 			PHAR_BUILDER_DIRECTORY
 		);
 	}

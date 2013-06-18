@@ -61,14 +61,14 @@ spl_autoload_register( function ( $className ) {
 			array_shift( $pathParts );
 			$fileName = implode( '/', $pathParts );
 
-			require_once __DIR__ . '/tests/phpunit/' . $fileName;
+			require_once __DIR__ . '/src/tests/phpunit/' . $fileName;
 		}
 		else {
 			$pathParts = explode( '/', $fileName );
 			array_shift( $pathParts );
 			$fileName = implode( '/', $pathParts );
 
-			require_once __DIR__ . '/src/' . $fileName;
+			require_once __DIR__ . '/src/lib/' . $fileName;
 		}
 	}
 } );

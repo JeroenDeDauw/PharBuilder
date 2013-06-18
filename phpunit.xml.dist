@@ -1,6 +1,6 @@
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
-         bootstrap="tests/bootstrap.php"
+         bootstrap="src/tests/bootstrap.php"
          cacheTokens="false"
          colors="true"
          convertErrorsToExceptions="true"
@@ -14,7 +14,7 @@
          verbose="true">
     <testsuites>
         <testsuite name="PharBuilder">
-            <directory>tests/phpunit</directory>
+            <directory>src/tests/phpunit</directory>
         </testsuite>
     </testsuites>
 </phpunit>

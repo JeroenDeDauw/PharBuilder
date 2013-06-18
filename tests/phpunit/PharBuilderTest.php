@@ -23,7 +23,8 @@ class PharBuilderTest extends \PHPUnit_Framework_TestCase {
 		return new PharBuilder(
 			'WikibaseDataModel.phar',
 			'WikibaseDataModel',
-			'WikibaseDataModel.php'
+			'WikibaseDataModel.php',
+			PHAR_BUILDER_DIRECTORY
 		);
 	}
 

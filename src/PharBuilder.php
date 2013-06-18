@@ -13,40 +13,23 @@ class PharBuilder {
 	protected $pharFileName;
 	protected $pharInternalNamespace;
 	protected $entryPoint;
+	protected $sourceDirectory;
 
-	public function __construct( $pharFileName, $pharInternalNamespace, $entryPoint ) {
+	public function __construct( $pharFileName, $pharInternalNamespace, $entryPoint, $sourceDirectory ) {
 		$this->pharFileName = $pharFileName;
 		$this->pharInternalNamespace = $pharInternalNamespace;
 		$this->entryPoint = $entryPoint;
+		$this->sourceDirectory = $sourceDirectory;
 	}
 
 	public function buildPhar() {
 		$this->verifyCanBuild();
 
-		$phar = new Phar(
-			$this->pharFileName,
-			Phar::CURRENT_AS_FILEINFO | Phar::KEY_AS_FILENAME,
-			$this->pharInternalNamespace
-		);
+		$phar = $this->getNewPhar();
 
-		$phar->startBuffering();
-
-		$phar = $phar->convertToExecutable();
+		$this->addFilesToPhar( $phar );
 
 		$phar->setStub( $this->getStub() );
-
-		$path = '/home/j/www/phase3/extensions/WikibaseDataModel/';
-
-		/**
-		 * @var splFileInfo $fileInfo
-		 */
-		foreach ( new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $path ) ) as $fileInfo ) {
-			if ( $fileInfo->getExtension() === 'php' ) {
-				$phar->addFile( $fileInfo->getPathname() );
-			}
-		}
-
-		$phar->stopBuffering();
 	}
 
 	protected function verifyCanBuild() {
@@ -58,6 +41,16 @@ class PharBuilder {
 		}
 	}
 
+	protected function getNewPhar() {
+		$phar = new Phar(
+			$this->pharFileName,
+			Phar::CURRENT_AS_FILEINFO | Phar::KEY_AS_FILENAME,
+			$this->pharInternalNamespace
+		);
+
+		return $phar->convertToExecutable();
+	}
+
 	protected function getStub() {
 		$entryPoint = 'phar://' . $this->pharInternalNamespace . '/' . $this->entryPoint;
 
@@ -67,6 +60,21 @@ Phar::mapPhar();
 include '$entryPoint';
 __HALT_COMPILER();
 EOF;
+	}
+
+	protected function addFilesToPhar( Phar $phar ) {
+		$phar->startBuffering();
+
+		/**
+		 * @var splFileInfo $fileInfo
+		 */
+		foreach ( new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $this->sourceDirectory ) ) as $fileInfo ) {
+			if ( $fileInfo->getExtension() === 'php' ) {
+				$phar->addFile( $fileInfo->getPathname() );
+			}
+		}
+
+		$phar->stopBuffering();
 	}
 
 }

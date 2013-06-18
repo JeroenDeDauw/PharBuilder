@@ -33,6 +33,7 @@ if ( defined( 'PHAR_BUILDER_VERSION' ) ) {
 }
 
 define( 'PHAR_BUILDER_VERSION', '0.1' );
+define( 'PHAR_BUILDER_DIRECTORY', __DIR__ );
 
 spl_autoload_register( function ( $className ) {
 	$className = ltrim( $className, '\\' );

@@ -1,0 +1,30 @@
+
+{
+	"name": "jeroen-de-dauw/phar-builder",
+	"type": "library",
+	"description": "Wrapper utility around PHPs native Phar class",
+	"keywords": [
+		"Phar"
+	],
+	"homepage": "https://github.com/JeroenDeDauw/PharBuilder",
+	"license": "GPL-2.0+",
+	"authors": [
+		{
+			"name": "Jeroen De Dauw",
+			"email": "jeroendedauw@gmail.com",
+			"homepage": "http://jeroendedauw.com",
+			"role": "Creator"
+		}
+	],
+	"require": {
+		"php": ">=5.4.0"
+	},
+	"autoload": {
+		"files" : [
+			"version.php"
+		],
+		"psr-0": {
+			"PharBuilder\\": "src/"
+		}
+	}
+}

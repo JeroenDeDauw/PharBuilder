@@ -12,10 +12,12 @@ class PharBuilder {
 
 	protected $pharFileName;
 	protected $pharInternalNamespace;
+	protected $entryPoint;
 
-	public function __construct( $pharFileName, $pharInternalNamespace ) {
+	public function __construct( $pharFileName, $pharInternalNamespace, $entryPoint ) {
 		$this->pharFileName = $pharFileName;
 		$this->pharInternalNamespace = $pharInternalNamespace;
+		$this->entryPoint = $entryPoint;
 	}
 
 	public function buildPhar() {
@@ -31,14 +33,7 @@ class PharBuilder {
 
 		$phar = $phar->convertToExecutable();
 
-		$phar->setStub(
-<<<EOF
-<?php
-Phar::mapPhar();
-include 'phar://WikibaseDataModel/WikibaseDataModel.php';
-__HALT_COMPILER();
-EOF
-		);
+		$phar->setStub( $this->getStub() );
 
 		$path = '/home/j/www/phase3/extensions/WikibaseDataModel/';
 
@@ -61,6 +56,17 @@ EOF
 					. 'http://de3.php.net/manual/en/phar.configuration.php#ini.phar.readonly'
 			);
 		}
+	}
+
+	protected function getStub() {
+		$entryPoint = 'phar://' . $this->pharInternalNamespace . '/' . $this->entryPoint;
+
+		return <<<EOF
+			<?php
+Phar::mapPhar();
+include '$entryPoint';
+__HALT_COMPILER();
+EOF;
 	}
 
 }

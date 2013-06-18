@@ -52,10 +52,10 @@ class PharBuilder {
 	}
 
 	protected function getStub() {
-		$entryPoint = 'phar://' . $this->pharInternalNamespace . '/' . $this->entryPoint;
+		$entryPoint = 'phar://' . $this->pharFileName . '/' . $this->entryPoint;
 
 		return <<<EOF
-			<?php
+<?php
 Phar::mapPhar();
 include '$entryPoint';
 __HALT_COMPILER();
@@ -70,7 +70,8 @@ EOF;
 		 */
 		foreach ( new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $this->sourceDirectory ) ) as $fileInfo ) {
 			if ( $fileInfo->getExtension() === 'php' ) {
-				$phar->addFile( $fileInfo->getPathname() );
+				$relativePath = substr( $fileInfo->getPathname(), strlen( $this->sourceDirectory ) + 1 );
+				$phar->addFile( $fileInfo->getPathname(), $relativePath );
 			}
 		}
 

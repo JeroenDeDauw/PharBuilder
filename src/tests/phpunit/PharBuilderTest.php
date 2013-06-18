@@ -7,8 +7,14 @@ use RuntimeException;
 
 class PharBuilderTest extends \PHPUnit_Framework_TestCase {
 
+	protected static $pharFileName;
+
+	public static function setUpBeforeClass() {
+		self::$pharFileName = PHAR_BUILDER_DIRECTORY . '/PharBuilder.phar';
+	}
+
 	public static function tearDownAfterClass() {
-		unlink( 'WikibaseDataModel.phar' );
+		unlink( self::$pharFileName );
 	}
 
 	public function testExecuteBuildPharCreatesPharFile() {
@@ -16,12 +22,16 @@ class PharBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$builder->buildPhar();
 
-		$this->assertFileExists( 'WikibaseDataModel.phar', 'A file with the correct name was created' );
+		$this->assertFileExists( self::$pharFileName, 'A file with the correct name was created' );
+
+		include_once self::$pharFileName;
+
+	//	$this->assertArrayHasKey( 'awesomeness', $GLOBALS );
 	}
 
 	protected function newDataModelBuilder() {
 		return new PharBuilder(
-			'PharBuilder.phar',
+			self::$pharFileName,
 			'PharBuilder',
 			'entryPoint.php',
 			PHAR_BUILDER_DIRECTORY

@@ -21,10 +21,7 @@
 	},
 	"autoload": {
 		"files" : [
-			"version.php"
-		],
-		"psr-0": {
-			"PharBuilder\\": "src/"
-		}
+			"entryPoint.php"
+		]
 	}
 }

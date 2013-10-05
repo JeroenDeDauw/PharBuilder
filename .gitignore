@@ -1,7 +1,10 @@
-.*
 *~
 *.kate-swp
-.*.swp
+*.swp
+*.log
 
-!.gitignore
-!.travis.yml
+!.*
+
+build/
+
+.idea/workspace.xml

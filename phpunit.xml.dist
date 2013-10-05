@@ -1,6 +1,6 @@
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
-         bootstrap="src/tests/bootstrap.php"
+         bootstrap="tests/bootstrap.php"
          cacheTokens="false"
          colors="true"
          convertErrorsToExceptions="true"
@@ -14,7 +14,12 @@
          verbose="true">
     <testsuites>
         <testsuite name="PharBuilder">
-            <directory>src/tests/phpunit</directory>
+            <directory>tests/phpunit</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src</directory>
+        </whitelist>
+    </filter>
 </phpunit>

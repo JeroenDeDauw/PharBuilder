@@ -5,12 +5,16 @@ namespace PharBuilder\Tests;
 use PharBuilder\PharBuilder;
 use RuntimeException;
 
+/**
+ * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ */
 class PharBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	protected static $pharFileName;
 
 	public static function setUpBeforeClass() {
-		self::$pharFileName = PHAR_BUILDER_DIRECTORY . '/PharBuilder.phar';
+		self::$pharFileName = PHAR_BUILDER_DIRECTORY . '/build/PharBuilder.phar';
 	}
 
 	public static function tearDownAfterClass() {
@@ -24,9 +28,10 @@ class PharBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertFileExists( self::$pharFileName, 'A file with the correct name was created' );
 
-		include_once self::$pharFileName;
-
-	//	$this->assertArrayHasKey( 'awesomeness', $GLOBALS );
+		$this->assertEquals(
+			42,
+			include_once 'phar://' . self::$pharFileName . '/tests/testPhpFile.php'
+		);
 	}
 
 	protected function newDataModelBuilder() {

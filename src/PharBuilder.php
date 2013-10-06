@@ -20,7 +20,7 @@ class PharBuilder {
 	protected $sourceDirectory;
 
 	public function __construct( $pharFileName, $pharInternalNamespace, $entryPoint, $sourceDirectory ) {
-		$this->pharFileName = 'phar://' . $pharFileName;
+		$this->pharFileName = $pharFileName;
 		$this->pharInternalNamespace = $pharInternalNamespace;
 		$this->entryPoint = $entryPoint;
 		$this->sourceDirectory = $sourceDirectory;
@@ -56,7 +56,7 @@ class PharBuilder {
 	}
 
 	protected function getStub() {
-		$entryPoint = $this->pharFileName . '/' . $this->entryPoint;
+		$entryPoint = 'phar://' . $this->pharFileName . '/' . $this->entryPoint;
 
 		return <<<EOF
 <?php

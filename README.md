@@ -3,6 +3,8 @@
 PharBuilder is a simple class that provides a slightly higher level phar API.
 
 [![Build Status](https://secure.travis-ci.org/JeroenDeDauw/PharBuilder.png?branch=master)](http://travis-ci.org/JeroenDeDauw/PharBuilder)
+[![Code Coverage](https://scrutinizer-ci.com/g/JeroenDeDauw/PharBuilder/badges/coverage.png?s=f791576bcfa16a0318fafedcf1c139e594d90911)](https://scrutinizer-ci.com/g/JeroenDeDauw/PharBuilder/)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/JeroenDeDauw/PharBuilder/badges/quality-score.png?s=50055e55ce6a7e2de35179eb025974991d0cd617)](https://scrutinizer-ci.com/g/JeroenDeDauw/PharBuilder/)
 [![Dependency Status](https://www.versioneye.com/package/php--jeroen-de-dauw--phar-builder/badge.png)](https://www.versioneye.com/package/php--jeroen-de-dauw--phar-builder)
 
 On [Packagist](https://packagist.org/packages/jeroen-de-dauw/phar-builder):
@@ -14,7 +16,6 @@ On [Packagist](https://packagist.org/packages/jeroen-de-dauw/phar-builder):
 * PHP 5.3 or later
 
 ## Installation
-
 
 To add this package as a local, per-project dependency to your project, simply add a
 dependency on `jeroen-de-dauw/phar-builder` to your project's `composer.json` file.

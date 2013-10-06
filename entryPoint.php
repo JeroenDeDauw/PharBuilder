@@ -4,7 +4,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-var_dump(ini_get('phar.readonly'));exit;
+
 if ( defined( 'PHAR_BUILDER_VERSION' ) ) {
 	// Do not initialize more then once.
 	return;

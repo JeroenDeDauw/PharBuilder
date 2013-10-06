@@ -22,7 +22,7 @@ class PharBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testExecuteBuildPharCreatesPharFile() {
-		$builder = $this->newDataModelBuilder();
+		$builder = $this->newPharBuilder();
 
 		$builder->buildPhar();
 
@@ -34,7 +34,7 @@ class PharBuilderTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	protected function newDataModelBuilder() {
+	protected function newPharBuilder() {
 		return new PharBuilder(
 			self::$pharFileName,
 			'PharBuilder',
@@ -44,7 +44,7 @@ class PharBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testCannotExecuteBuildPharWhenPharReadonly() {
-		$builder = $this->newDataModelBuilder();
+		$builder = $this->newPharBuilder();
 
 		ini_set( 'phar.readonly', '1' );
 
